@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 25 Feb 2026 pada 12.14
+-- Waktu pembuatan: 26 Feb 2026 pada 03.27
 -- Versi server: 8.0.45-0ubuntu0.24.04.1
 -- Versi PHP: 8.3.6
 
@@ -58,6 +58,20 @@ CREATE TABLE `bank_transfer` (
   `nama_pemilik` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `bank_transfer`
+--
+
+INSERT INTO `bank_transfer` (`id`, `cafe_id`, `nama_bank`, `nomor_bank`, `nama_pemilik`) VALUES
+(1, 17, 'BNI', 2321, 'sadas'),
+(2, 17, 'BNI', 2321, 'sadas'),
+(3, 17, 'BNI', 2321, 'sadas'),
+(4, 17, 'BNI', 232133213, 'dasdasasdas'),
+(5, 17, 'BNI', 232133213, 'sadas'),
+(6, 17, 'BNI', 2321, 'asd'),
+(7, 17, 'BNI', 2321, 'dsa'),
+(8, 17, 'BNI', 2321, 'asd');
+
 -- --------------------------------------------------------
 
 --
@@ -96,6 +110,23 @@ CREATE TABLE `ewalet` (
   `nama_pemilik` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `ewalet`
+--
+
+INSERT INTO `ewalet` (`id`, `cafe_id`, `nama_wallet`, `nomor_wallet`, `nama_pemilik`) VALUES
+(1, 16, 'Dana', '085722450920', 'Mahesa'),
+(2, 17, 'DANA', '23321321', NULL),
+(3, 17, 'DANA', '23213', NULL),
+(4, 17, 'GOPAY', '321321', NULL),
+(5, 17, 'GOPAY', '321321', NULL),
+(6, 17, 'GOPAY', '321321', 'sadas'),
+(7, 17, 'SHOPEE', '21321', ''),
+(8, 17, 'GOPAY', '321321534534', 'sdfsdfsd'),
+(9, 17, 'DANA', '23321321', 'hff'),
+(10, 17, 'SHOPEE', '21321', 'gjhgh'),
+(11, 17, 'GOPAY', '321321', 'sadas');
+
 -- --------------------------------------------------------
 
 --
@@ -125,7 +156,6 @@ CREATE TABLE `menus` (
   `id` int NOT NULL,
   `cafe_id` int NOT NULL,
   `id_kategori` int NOT NULL,
-  `id_badge` int DEFAULT NULL,
   `nama_menu` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `image_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deskripsi` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -137,8 +167,8 @@ CREATE TABLE `menus` (
 -- Dumping data untuk tabel `menus`
 --
 
-INSERT INTO `menus` (`id`, `cafe_id`, `id_kategori`, `id_badge`, `nama_menu`, `image_url`, `deskripsi`, `harga`, `status`) VALUES
-(8, 17, 1, NULL, 'dasdas', 'http://192.168.1.13:3000/asset/1771999845905-334400897.jpg', '', 230, 1);
+INSERT INTO `menus` (`id`, `cafe_id`, `id_kategori`, `nama_menu`, `image_url`, `deskripsi`, `harga`, `status`) VALUES
+(8, 17, 1, 'dasdas', 'http://192.168.1.13:3000/asset/1771999845905-334400897.jpg', '', 230, 1);
 
 -- --------------------------------------------------------
 
@@ -152,6 +182,16 @@ CREATE TABLE `pembayaran` (
   `nama_method` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `status_method` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id`, `cafe_id`, `nama_method`, `status_method`) VALUES
+(1, 17, 'tunai', 1),
+(2, 17, 'qris', 1),
+(3, 17, 'transfer_bank', 1),
+(4, 17, 'ewalet_manual', 1);
 
 -- --------------------------------------------------------
 
@@ -190,8 +230,45 @@ CREATE TABLE `qris` (
   `nama_merchant` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `nomor_merchant` int NOT NULL,
   `qris_image` text COLLATE utf8mb4_general_ci NOT NULL,
-  `biaya_transaksi_qris` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
+  `biaya_type` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `biaya_transaksi_qris` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `qris`
+--
+
+INSERT INTO `qris` (`id`, `cafe_id`, `nama_merchant`, `nomor_merchant`, `qris_image`, `biaya_type`, `biaya_transaksi_qris`) VALUES
+(1, 17, 'ASTAKIRA Cafe', 2423432, 'http://192.168.1.13:3000/asset/1772026196314-329318349.png', 'percent', '23'),
+(2, 17, 'ASTAKIRA Cafe', 432432, 'http://192.168.1.13:3000/asset/1772028228493-350511145.png', 'none', NULL),
+(3, 17, 'ASTAKIRA Cafe', 432432, 'http://192.168.1.13:3000/asset/1772028243371-964802740.png', 'none', NULL),
+(4, 17, 'ASTAKIRA Cafe', 432432, 'http://192.168.1.13:3000/asset/1772028266528-537760276.png', 'none', NULL),
+(5, 17, 'ASTAKIRA Cafe', 4324, 'http://192.168.1.13:3000/asset/1772029354841-739067883.png', 'none', NULL),
+(6, 17, 'ASTAKIRA Cafe', 434343, 'http://192.168.1.13:3000/asset/1772032110470-429203959.png', 'none', NULL),
+(7, 17, 'ASTAKIRA Cafe', 321321, 'http://192.168.1.13:3000/asset/1772035795536-251658325.png', 'none', NULL),
+(8, 17, 'ASTAKIRA Cafe', 56586, 'http://192.168.1.13:3000/asset/1772036506608-641251032.png', 'none', NULL),
+(9, 17, 'ASTAKIRA Cafesdas', 3213, 'http://192.168.1.13:3000/asset/1772036626722-45498602.png', 'none', NULL),
+(10, 17, 'ASTAKIRA Cafedsadas', 321321, 'http://192.168.1.13:3000/asset/1772036661598-838478145.png', 'none', NULL),
+(11, 17, 'ASTAKIRA Cafedsadas', 321321, 'http://192.168.1.13:3000/asset/1772036666442-737485454.png', 'none', NULL),
+(12, 17, 'ASTAKIRA Cafe', 321321321, 'http://192.168.1.13:3000/asset/1772036745006-165584236.png', 'none', NULL),
+(13, 17, 'ASTAKIRA Cafe', 321321321, 'http://192.168.1.13:3000/asset/1772036753934-410617113.png', 'none', NULL),
+(14, 17, 'ASTAKIRA Cafe', 321321321, 'http://192.168.1.13:3000/asset/1772036792577-781937902.png', 'none', NULL),
+(15, 17, 'ASTAKIRA Cafe', 321321321, 'http://192.168.1.13:3000/asset/1772036837233-36455352.png', 'none', NULL),
+(16, 17, 'ASTAKIRA Cafe', 432432, 'http://192.168.1.13:3000/asset/1772036951411-898325222.png', 'none', NULL),
+(17, 17, 'ASTAKIdsadaRA Cafe', 43324, 'http://192.168.1.13:3000/asset/1772037138092-45690525.png', 'none', NULL),
+(18, 17, 'ASTAKIdsadaRA Cafe', 43324, 'http://192.168.1.13:3000/asset/1772037150481-331542221.png', 'none', NULL),
+(19, 17, 'ASTAKIRA Cafe21321', 432, 'http://192.168.1.13:3000/asset/1772037190825-307886728.png', 'none', NULL),
+(20, 17, 'ASTAKIRA Cafe21321', 432, 'http://192.168.1.13:3000/asset/1772037191945-718046627.png', 'none', NULL),
+(21, 17, 'ASTAKIRA Cafe21321', 432, 'http://192.168.1.13:3000/asset/1772037192095-821027895.png', 'none', NULL),
+(22, 17, 'ASTAKIRA Cafe21321', 432, 'http://192.168.1.13:3000/asset/1772037192240-190219561.png', 'none', NULL),
+(23, 17, 'ASTAKIRA Cafe21321', 432, 'http://192.168.1.13:3000/asset/1772037192508-215211849.png', 'none', NULL),
+(24, 17, 'ASTAKIRA Cafe21321', 432, 'http://192.168.1.13:3000/asset/1772037192647-21807195.png', 'none', NULL),
+(25, 17, 'ASTAKIRA Cafe21321', 432, 'http://192.168.1.13:3000/asset/1772037192787-696880877.png', 'none', NULL),
+(26, 17, 'ASTAKIRA Cafe', 3123, 'http://192.168.1.13:3000/asset/1772037388870-781436861.png', 'none', NULL),
+(27, 17, 'ASTAKIRA Cafe', 3123, 'http://192.168.1.13:3000/asset/1772037612408-139718097.png', 'none', NULL),
+(28, 17, 'ASTAKIRA Cafe', 3213, 'http://192.168.1.13:3000/asset/1772037697933-21663658.png', 'none', NULL),
+(29, 17, 'ASTAKIRA Cafe', 3213, 'http://192.168.1.13:3000/asset/1772037764708-752306450.png', 'none', NULL),
+(30, 17, 'ASTAKIRA Cafe21321', 3213, 'http://192.168.1.13:3000/asset/1772037764708-752306450.png', 'none', NULL);
 
 -- --------------------------------------------------------
 
@@ -267,8 +344,7 @@ ALTER TABLE `kategoris`
 --
 ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_kategori` (`id_kategori`,`id_badge`),
-  ADD KEY `Menu Badge` (`id_badge`),
+  ADD KEY `id_kategori` (`id_kategori`),
   ADD KEY `cafe_id` (`cafe_id`);
 
 --
@@ -321,7 +397,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT untuk tabel `bank_transfer`
 --
 ALTER TABLE `bank_transfer`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `cafe`
@@ -333,7 +409,7 @@ ALTER TABLE `cafe`
 -- AUTO_INCREMENT untuk tabel `ewalet`
 --
 ALTER TABLE `ewalet`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategoris`
@@ -351,7 +427,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `promo`
@@ -363,7 +439,7 @@ ALTER TABLE `promo`
 -- AUTO_INCREMENT untuk tabel `qris`
 --
 ALTER TABLE `qris`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `table_cafe`
@@ -409,7 +485,6 @@ ALTER TABLE `kategoris`
 -- Ketidakleluasaan untuk tabel `menus`
 --
 ALTER TABLE `menus`
-  ADD CONSTRAINT `Menu Badge` FOREIGN KEY (`id_badge`) REFERENCES `badges` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `Menu Cafe` FOREIGN KEY (`cafe_id`) REFERENCES `cafe` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `Menu Kategori` FOREIGN KEY (`id_kategori`) REFERENCES `kategoris` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
