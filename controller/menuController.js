@@ -250,3 +250,27 @@ exports.deleteMenu = (req, res) => {
     },
   );
 };
+
+exports.getMenusPublic = (req, res) => {
+  const cafeId = req.params.cafe_id;
+
+  db.query(
+    `SELECT m.*, k.nama_kategori 
+     FROM menus m
+     JOIN kategoris k ON m.id_kategori = k.id
+     WHERE m.cafe_id = ?`,
+    [cafeId],
+    (err, results) => {
+      if (err) {
+        return sendResponse(
+          res,
+          500,
+          err?.sqlMessage || "Gagal mengambil menu",
+          []
+        );
+      }
+
+      return sendResponse(res, 200, "Berhasil mengambil menu", results || []);
+    }
+  );
+};

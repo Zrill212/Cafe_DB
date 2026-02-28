@@ -11,6 +11,7 @@ router.get('/', verifyToken, menuController.getMenus);
 
 router.get('/:id', verifyToken, menuController.getMenuById);
 
+router.get("/user/:cafe_id", menuController.getMenusPublic);
 
 
 router.post('/', verifyToken, upload.single("image"), menuController.createMenu);

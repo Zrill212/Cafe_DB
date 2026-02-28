@@ -9,6 +9,8 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use("/asset", express.static(path.join(__dirname, "asset")));
+app.use("/uploads", express.static("uploads"));
+app.use("/asset", express.static("asset"));
 
 app.use((req, res, next) => {
   if (req.path && req.path.startsWith("/asset")) return next();
@@ -106,6 +108,9 @@ app.use((req, res, next) => {
 });
 app.use("/api/auth", authRoutes);
 
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
 const menuRoutes = require('./routes/menuRoutes');
 app.use('/api/menu', menuRoutes);
 
@@ -132,6 +137,9 @@ app.use('/api/bank-transfer', bankTransferRoutes);
 
 const ewaletRoutes = require('./routes/ewaletRoutes');
 app.use('/api/ewalet', ewaletRoutes);
+
+const pengaturanRoutes = require('./routes/pengaturanRoutes');
+app.use('/api/pengaturan', pengaturanRoutes);
 
 app.listen(PORT,'0.0.0.0', () => {
   console.log(`Cafe API running di http://0.0.0.0:${PORT}`);
